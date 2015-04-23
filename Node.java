@@ -76,13 +76,13 @@ class Node implements ExprIF{
         
         Node n = this;
         
-        String stringTreated = "";
-        boolean littleTreeUnfinished = true;
-        boolean fromLeft = true;
-        boolean beOnRight = false;
+        String stringTreated = ""; // Contiendra la representation completement parenthesee de l arbre 
+        boolean littleTreeUnfinished = true; // Boolean servant a savoir si on a finis de parcourir la partie actuellement envisagee de l arbre 
+        boolean beOnRight = false; // Boolean servant a savoir si l on vient de la droite ou de la gauche lorsque l on remonte dans l arbre
+		boolean treeUnfinished = true;
         int rightCounter = 0;
         
-        while (n.left != null && n.right != null)
+        while (treeUnfinished) // Lorsque 
         {
             while (littleTreeUnfinished)
             {
@@ -96,7 +96,7 @@ class Node implements ExprIF{
                     stringTreated = "(" + n.carac + "" + n.back.carac + stringTreated;
                     n = n.back.right;
                 }
-                if (beOnRight)
+                if (beOnRight && n.back.back != null)
                 {
                     rightCounter = 0;
                     stringTreated = "(" + stringTreated;
@@ -104,6 +104,10 @@ class Node implements ExprIF{
                     n = n.back.back;
                     littleTreeUnfinished = false;
                 }
+				else if (beOnRight && n.back == null)
+				{
+					treeUnfinished = false;
+				}
                 if (n.left == null && !beOnRight)
                 {
                     stringTreated = stringTreated + "" + n.carac + ")";
@@ -118,7 +122,14 @@ class Node implements ExprIF{
             for (int i = 0; i < rightCounter + 1; i++)
             {
                 stringTreated = stringTreated + ")";
-                n = n.back;
+                if (n.back != null)
+				{
+					n = n.back;
+				}
+				else 
+				{
+					treeUnfinished = false;
+				}
             }
             n = n.right;
             beOnRight = true;
