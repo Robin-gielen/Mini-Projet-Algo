@@ -3,12 +3,6 @@ import java.lang.String;
 import java.io.*;
 import java.util.Random;
 
-/**
- * Write a description of class stringExtractor here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class stringExtractor
 {
     public static void main (String exprsIN)
