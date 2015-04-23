@@ -25,8 +25,6 @@ public class TreeBuilder implements TreeBuilderIF{
      */
     public ExprIF build(){
         Pile pile = new Pile();
-        
-        
         char caractere;
         for (int i = 0; i <= (untreatedLines.length()-1); i++){ //Boucle parcourant la totalite de la chaine de caractere
             caractere = untreatedLines.charAt(i); // Variable contenant le caractere a traiter
@@ -42,6 +40,7 @@ public class TreeBuilder implements TreeBuilderIF{
                 n2.back = n;
                 n.left = n1;
                 n.right = n2;
+                n.back = null;
                 pile.push(n);
             }
         }

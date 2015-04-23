@@ -39,7 +39,7 @@ class Node implements ExprIF{
     public ExprIF getReducedTree(){
         Node node = this;
         String chain = Main.chaine; 
-        String calculChain;
+        String calculChain = "";
         boolean subtreefinished = true; // Variable servant a verifier si l'arbre a ete reduit
         
         while(node.left != null && node.right != null){ // Boucle servant a resoudre la totalite de l'arbre
@@ -50,7 +50,8 @@ class Node implements ExprIF{
                 }
                 if (node.back.right.left == null){ // Condition verifiant si le calcul peut etre fait
                     calculChain = (node.expression + "" + node.back.expression + "" + node.back.right.expression+ "" );// creation du string servant a faire le calcul 
-                    node.back.expression = calcul(calculChain);
+                    char s = calcul(calculChain);
+                    node.back.expression = s;
                     node.back.left = null;
                     node.back.right = null;
                     subtreefinished = false;
@@ -61,9 +62,9 @@ class Node implements ExprIF{
             }
             subtreefinished = true;
             node = this;
-            chain = chain + (node.toString() + "   ");
+            chain = chain + (node.toString() + " = ");
         }
-        Main.chaine = (chain + "/n");// Modification du String de la classe main en vue d'etre sauvegardee dans un fichier
+        Main.chaine = (chain);// Modification du String de la classe main en vue d'etre sauvegardee dans un fichier
         return node;
     }
 
@@ -84,15 +85,19 @@ class Node implements ExprIF{
         boolean beOnRight = false; // Boolean servant a savoir si l on vient de la droite ou de la gauche lorsque l on remonte dans l arbre
 		boolean treeUnfinished = true;
         int rightCounter = 0;
-        
-        while (treeUnfinished){ // Lorsque     
+        if (n.left == null && n.right == null){
+                stringTreated = "(" + n.expression + ")";
+                return stringTreated;
+        }
+        while (treeUnfinished){ // Lorsque 
             while (littleTreeUnfinished){
+
                 while (n.left != null){
                     beOnRight = false;
                     n = n.left;
                 }
-                if (!beOnRight){
-                    stringTreated = "(" + n.expression + "" + n.back.expression + stringTreated;
+                if (!beOnRight && n.back != null){
+                    stringTreated = stringTreated + "(" + n.expression + "" + n.back.expression;
                     n = n.back.right;
                 }
                 if (beOnRight && n.back.back != null){
@@ -107,7 +112,7 @@ class Node implements ExprIF{
 					treeUnfinished = false;
 				}
                 if (n.left == null && !beOnRight){
-                    stringTreated = stringTreated + "" + n.expression + ")";
+                    stringTreated = stringTreated + "" + n.expression; // + ")";
                     n = n.back; 
                     littleTreeUnfinished = false;
                 }
@@ -115,7 +120,7 @@ class Node implements ExprIF{
                     rightCounter++;
                 }
             }
-            for (int i = 0; i < rightCounter + 1; i++){
+            for (int i = 0; i < rightCounter + 1 ; i++){
                 stringTreated = stringTreated + ")";
                 if (n.back != null){
 					n = n.back;
@@ -128,6 +133,7 @@ class Node implements ExprIF{
             beOnRight = true;
             littleTreeUnfinished = true;
         }  
+        
         return stringTreated;
     }
     

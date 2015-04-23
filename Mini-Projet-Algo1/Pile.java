@@ -28,7 +28,6 @@ public class Pile{
             head = n;
         }
         else{
-            head.back = n;
             n.next = head;
             head = n;
         }
@@ -46,7 +45,6 @@ public class Pile{
             if (head.next != null){
                 tempon = head;
                 head = head.next;
-                //head.back = null;
             }
             else{
                 tempon = head;
