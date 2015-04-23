@@ -1,37 +1,52 @@
- 
+/**
+ * 
+ * Classe servant à la construction d'un arbre
+ * 
+ */ 
 
 public class TreeBuilder implements TreeBuilderIF{
+    public String untreatedLines; 
     
-    public String elem;
-    
-    public TreeBuilder(String elem){
-        this.elem = elem;
+    /**
+    *
+    * Constructeur de la classe Treebuilder
+    * 
+    */
+    public TreeBuilder(String untreatedLines){
+        this.untreatedLines = untreatedLines;
     }
-            
+    
+    /**
+     * @pre L'expression arithmétique passée au constructeur est
+     *      complètement parenthésée et bien formée. Les éléments
+     *      de l'expression sont séparés par un espace.
+     * @post renvoie un arbre représentant l'expression arithmétique
+     *       passée au constructeur
+     */
     public ExprIF build(){
-        Pile s = new Pile();
-        Node tempon = new Node(' ');
+        Pile pile = new Pile();
+        Node tempon = new Node(' '); // Noeud tempon servant a stocker les caracteres dans une pile
         Node n = new Node(' ');
         Node n1 = new Node(' ');
         Node n2 = new Node(' ');
-        char carac;
-        for (int i = 0; i < (elem.length()-1); i++){
-            carac = elem.charAt(i);
-            if (carac != '(' && carac !=')'){
-                tempon.carac = carac;
-                s.push(tempon);
+        char caractere;
+        for (int i = 0; i <= (untreatedLines.length()-1); i++){ //Boucle parcourant la totalite de la chaine de caractere
+            caractere = untreatedLines.charAt(i); // Variable contenant le caractere a traiter
+            if (caractere != '(' && caractere !=')'){ // Condition verifiant si le caractere est different de ( ou )
+                tempon.expression = caractere;
+                pile.push(tempon);
             }
-            else if (carac == ')'){
-                n2 = s.pop();
-                n = s.pop();
-                n1 = s.pop();
+            else if (caractere == ')'){ // Condition servant a creer chaque racine de sous arbre
+                n2 = pile.pop();
+                n = pile.pop();
+                n1 = pile.pop();
                 n1.back = n;
                 n2.back = n;
                 n.left = n1;
                 n.right = n2;
-                s.push(n);
+                pile.push(n);
             }
         }
-        return s.pop();
+        return pile.pop();
     }
 }
