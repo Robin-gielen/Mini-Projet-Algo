@@ -11,6 +11,7 @@ class Node implements ExprIF{
     Node left;
     Node right;
     Node back;
+    Node next;
     
     /**
      * 
@@ -22,6 +23,7 @@ class Node implements ExprIF{
         left = null;
         right = null;
         back = null;
+        next = null;
     }
     
     /**
@@ -43,6 +45,7 @@ class Node implements ExprIF{
         while(node.left != null && node.right != null){ // Boucle servant a resoudre la totalite de l'arbre
             while(subtreefinished){
                 while (node.left != null){ // Boucle servant a attaindre l'element positionne le plus bas dans l'arbre
+                    System.out.println (node.expression);
                     node = node.left;
                 }
                 if (node.back.right.left == null){ // Condition verifiant si le calcul peut etre fait
