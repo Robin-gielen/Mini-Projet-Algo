@@ -45,7 +45,6 @@ class Node implements ExprIF{
         while(node.left != null && node.right != null){ // Boucle servant a resoudre la totalite de l'arbre
             while(subtreefinished){
                 while (node.left != null){ // Boucle servant a attaindre l'element positionne le plus bas dans l'arbre
-                    System.out.println (node.expression);
                     node = node.left;
                 }
                 if (node.back.right.left == null){ // Condition verifiant si le calcul peut etre fait
@@ -82,7 +81,7 @@ class Node implements ExprIF{
         String stringTreated = ""; // Contiendra la representation completement parenthesee de l arbre 
         boolean littleTreeUnfinished = true; // Boolean servant a savoir si on a finis de parcourir la partie actuellement envisagee de l arbre 
         boolean beOnRight = false; // Boolean servant a savoir si l on vient de la droite ou de la gauche lorsque l on remonte dans l arbre
-		boolean treeUnfinished = true;
+        boolean treeUnfinished = true;
         int rightCounter = 0;
         if (n.left == null && n.right == null){
                 stringTreated = "(" + n.expression + ")";
@@ -107,9 +106,9 @@ class Node implements ExprIF{
                     n = n.back.back;
                     littleTreeUnfinished = false;
                 }
-				else if (beOnRight && n.back == null){
-					treeUnfinished = false;
-				}
+                else if (beOnRight && n.back == null){
+                    treeUnfinished = false;
+                }
                 if (n.left == null && !beOnRight){
                     stringTreated = stringTreated + "" + n.expression; // + ")";
                     n = n.back; 
@@ -122,11 +121,11 @@ class Node implements ExprIF{
             for (int i = 0; i < rightCounter + 1 ; i++){
                 stringTreated = stringTreated + ")";
                 if (n.back != null){
-					n = n.back;
-				}
-				else{
-					treeUnfinished = false;
-				}
+                    n = n.back;
+                }
+                else{
+                    treeUnfinished = false;
+                }
             }
             n = n.right;
             beOnRight = true;
@@ -144,12 +143,37 @@ class Node implements ExprIF{
      */
       public static String calcul (String operation){
           String calcul = "";
+          /**char operateur;
+          *double var1;
+          *double var2;
+          *int i = 0;
+          *while(Character.isDigit(operation.charAt(i)) || operation.charAt(i) == '.'){
+          *    i++;
+          *}
+          *operateur = operation.charAt(i);
+          *var1 = Double.parseDouble(operation.substring(0,i));
+          *var2 = Double.parseDouble(operation.substring(i+1,operation.length()));
+          *
+          *if(operateur == '+'){
+          *    calcul = (var1 + var2) + "";
+          *}
+          *else if(operateur == '-'){
+          *    calcul = (var1 - var2) + "";
+          *}
+          *else if(operateur == '*'){
+          *    calcul = (var1 * var2) + "";
+          *}
+          *else{
+          *    calcul = (var1 / var2) + "";
+          *}
+          */
+          
           try{ // Implementation des elements necessaires a la resolution du calcul a partir d'une chaine de caracteres
               ScriptEngineManager mgr = new ScriptEngineManager(); 
               ScriptEngine engine = mgr.getEngineByName("JavaScript");
               calcul = "" + (engine.eval(operation)); // Effectue l'operation contenue dans operation
           }
-          catch(Exception e){
+           catch(Exception e){
               System.exit(0);
           }
           return calcul;
