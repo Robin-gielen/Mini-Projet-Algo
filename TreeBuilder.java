@@ -31,19 +31,26 @@ public class TreeBuilder implements TreeBuilderIF{
 
         for (int i = 0; i <= (untreatedLines.length()-1); i++){ //Boucle parcourant la totalite de la chaine de caractere
             caractere = (untreatedLines.charAt(i) + ""); // Variable contenant le caractere a traiter
-            compteur = 1;
+            compteur = 0;
             if (caractere.charAt(0) != ('(') && caractere.charAt(0) !=(')')){ // Condition verifiant si le caractere est different de ( ou )
-                if (untreatedLines.charAt(i+1) != ('.')){
-                    tempon = new Node(caractere); // Noeud tempon servant a stocker les caracteres dans une pile
-                }
-                else{
-                    tempon = new Node(caractere + ".");
-                    for(int j = 2; Character.isDigit(untreatedLines.charAt(i+j)); j++){
+                if(untreatedLines.charAt(i+1) == ('.')){
+                    tempon = new Node(caractere);
+                    for(int j = 1; Character.isDigit(untreatedLines.charAt(i+j))|| untreatedLines.charAt(i+j) == ('.'); j++){
                         tempon.expression = tempon.expression + untreatedLines.charAt(i+j);
                         compteur++;
                     }
-                    i = i + compteur;
                 }
+                else if(Character.isDigit(untreatedLines.charAt(i)) && Character.isDigit(untreatedLines.charAt(i+1))){
+                    tempon = new Node(caractere);
+                    for(int j = 1; (Character.isDigit(untreatedLines.charAt(i+j)) || untreatedLines.charAt(i+j) == ('.')); j++){
+                        tempon.expression = tempon.expression + untreatedLines.charAt(i+j);
+                        compteur++;
+                    }
+                }
+                else{
+                    tempon = new Node(caractere); // Noeud tempon servant a stocker les caracteres dans une pile
+                }
+                i = i + compteur;
                 pile.push(tempon);
             }
             else if (caractere.charAt(0) == (')')){ // Condition servant a creer chaque racine de sous arbre
