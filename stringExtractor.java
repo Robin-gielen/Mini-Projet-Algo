@@ -9,14 +9,6 @@ import java.util.Random;
  */
 public class stringExtractor{
     /**
-     * 
-     * 
-     */
-    public static void main (String exprsIN){
-        stringExtracteur(exprsIN);
-    }
-    
-    /**
      * Exctractor of the string from the .txt file
      * 
      * @pre un fichier .txt dans lequel l arbre est represente par une expression arithmetique bien construite avec un espace entre chaque element 
@@ -57,7 +49,6 @@ public class stringExtractor{
                         untreatedLines[i] += currentLine.charAt(j);
                     }
                 }
-                System.out.println(untreatedLines[i]);
             }
         }
         catch (IOException e){
