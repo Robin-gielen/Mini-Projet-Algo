@@ -28,7 +28,7 @@ public class Pile{
             head = n;
         }
         else{
-            n.right = head;
+            n.next = head;
             head = n;
         }
     }
@@ -42,10 +42,10 @@ public class Pile{
     public Node pop(){
         tempon = null;
         if (!isEmpty()){
-            if (head.right != null){
+            if (head.next != null){
                 tempon = head;
-                head = head.right;
-                tempon.right = null;
+                head = head.next;
+                tempon.next = null;
             }
             else{
                 tempon = head;
