@@ -73,64 +73,16 @@ class Node implements ExprIF{
      *       complètement parenthésée de l'arbre  
      */
     public String toString(){
-        
-        Node n = this;
-        
-        String stringTreated = ""; // Contiendra la representation completement parenthesee de l arbre 
-        boolean littleTreeUnfinished = true; // Boolean servant a savoir si on a finis de parcourir la partie actuellement envisagee de l arbre 
-        boolean beOnRight = false; // Boolean servant a savoir si l on vient de la droite ou de la gauche lorsque l on remonte dans l arbre
-        boolean treeUnfinished = true;
-        int rightCounter = 0;
-        if (n.left == null && n.right == null){
-                stringTreated = "(" + n.expression + ")";
-                return stringTreated;
+        if (this.left == null && this.right == null)
+        {
+            return this.expression;
         }
-        while (treeUnfinished){ // Lorsque 
-            while (littleTreeUnfinished){
-
-                while (n.left != null){
-                    beOnRight = false;
-                    n = n.left;
-                }
-                if (!beOnRight && n.back != null){
-                    stringTreated = stringTreated + "(" + n.expression + "" + n.back.expression;
-                    n = n.back.right;
-                }
-                if (beOnRight && n.back.back != null){
-
-                    rightCounter = 0;
-                    stringTreated = "(" + stringTreated;
-                    stringTreated = stringTreated + "" + n.back.expression + "" + n.expression +")";
-                    n = n.back.back;
-                    littleTreeUnfinished = false;
-                }
-                else if (beOnRight && n.back == null){
-                    treeUnfinished = false;
-                }
-                if (n.left == null && !beOnRight){
-                    stringTreated = stringTreated + "" + n.expression; // + ")";
-                    n = n.back; 
-                    littleTreeUnfinished = false;
-                }
-                else if (!beOnRight){
-                    rightCounter++;
-                }
-            }
-            for (int i = 0; i < rightCounter + 1 ; i++){
-                stringTreated = stringTreated + ")";
-                if (n.back != null){
-                    n = n.back;
-                }
-                else{
-                    treeUnfinished = false;
-                }
-            }
-            n = n.right;
-            beOnRight = true;
-            littleTreeUnfinished = true;
-        }  
-        
-        return stringTreated;
+        else 
+        {
+            String actualString = "";
+            actualString = "(" + this.left.toString() + this.expression + this.right.toString() + ")";
+            return actualString;
+        }
     }
     
     /**
