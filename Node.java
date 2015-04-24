@@ -7,7 +7,7 @@ import javax.script.ScriptEngine;
  * 
  */
 class Node implements ExprIF{
-    char expression;
+    String expression;
     Node left;
     Node right;
     Node back;
@@ -18,7 +18,7 @@ class Node implements ExprIF{
      * Constructeur de la classe Node
      * 
      */
-    public Node(char expression){
+    public Node(String expression){
         this.expression = expression;
         left = null;
         right = null;
@@ -50,8 +50,7 @@ class Node implements ExprIF{
                 }
                 if (node.back.right.left == null){ // Condition verifiant si le calcul peut etre fait
                     calculChain = (node.expression + "" + node.back.expression + "" + node.back.right.expression+ "" );// creation du string servant a faire le calcul 
-                    char s = calcul(calculChain);
-                    node.back.expression = s;
+                    node.back.expression = calcul(calculChain);
                     node.back.left = null;
                     node.back.right = null;
                     subtreefinished = false;
@@ -143,7 +142,7 @@ class Node implements ExprIF{
      * @post renvois la sulution du calcul contenue dans operation
      * 
      */
-      public static char calcul (String operation){
+      public static String calcul (String operation){
           String calcul = "";
           try{ // Implementation des elements necessaires a la resolution du calcul a partir d'une chaine de caracteres
               ScriptEngineManager mgr = new ScriptEngineManager(); 
@@ -153,6 +152,6 @@ class Node implements ExprIF{
           catch(Exception e){
               System.exit(0);
           }
-          return calcul.charAt(0);
+          return calcul;
     } 
 }

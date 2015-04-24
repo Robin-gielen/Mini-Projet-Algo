@@ -25,14 +25,14 @@ public class TreeBuilder implements TreeBuilderIF{
      */
     public ExprIF build(){
         Pile pile = new Pile();
-        char caractere;
+        String caractere;
         for (int i = 0; i <= (untreatedLines.length()-1); i++){ //Boucle parcourant la totalite de la chaine de caractere
-            caractere = untreatedLines.charAt(i); // Variable contenant le caractere a traiter
-            if (caractere != '(' && caractere !=')'){ // Condition verifiant si le caractere est different de ( ou )
+            caractere = (untreatedLines.charAt(i) + ""); // Variable contenant le caractere a traiter
+            if (caractere.charAt(0) != ('(') && caractere.charAt(0) !=(')')){ // Condition verifiant si le caractere est different de ( ou )
                 Node tempon = new Node(caractere); // Noeud tempon servant a stocker les caracteres dans une pile
                 pile.push(tempon);
             }
-            else if (caractere == ')'){ // Condition servant a creer chaque racine de sous arbre
+            else if (caractere.charAt(0) == (')')){ // Condition servant a creer chaque racine de sous arbre
                 Node n2 = pile.pop();
                 Node n = pile.pop();
                 Node n1 = pile.pop();
