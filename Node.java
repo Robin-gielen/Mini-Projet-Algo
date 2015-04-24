@@ -38,7 +38,7 @@ class Node implements ExprIF{
      */
     public ExprIF getReducedTree(){
         Node node = this;
-        String chain = node.toString(); 
+        String chain = Main.chaine; 
         String calculChain = "";
         boolean subtreefinished = true; // Variable servant a verifier si l'arbre a ete reduit
         
@@ -95,31 +95,6 @@ class Node implements ExprIF{
      */
       public static String calcul (String operation){
           String calcul = "";
-            //               char operateur;
-            //               double var1;
-            //               double var2;
-            //               int i = 0;
-            //               while(Character.isDigit(operation.charAt(i)) || operation.charAt(i) == '.'){
-            //                   i++;
-            //               }
-            //               operateur = operation.charAt(i);
-            //               var1 = Double.parseDouble(operation.substring(0,i));
-            //               var2 = Double.parseDouble(operation.substring(i+1,operation.length()));
-            //               
-            //               if(operateur == '+'){
-            //                   calcul = (var1 + var2) + "";
-            //               }
-            //               else if(operateur == '-'){
-            //                   calcul = (var1 - var2) + "";
-            //               }
-            //               else if(operateur == '*'){
-            //                   calcul = (var1 * var2) + "";
-            //               }
-            //               else{
-            //                   calcul = (var1 / var2) + "";
-            //               }
-            //               
-              
           try{ // Implementation des elements necessaires a la resolution du calcul a partir d'une chaine de caracteres
               ScriptEngineManager mgr = new ScriptEngineManager(); 
               ScriptEngine engine = mgr.getEngineByName("JavaScript");
