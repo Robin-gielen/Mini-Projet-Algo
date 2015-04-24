@@ -26,7 +26,7 @@ public class Main {
         try 
         {
             BufferedWriter bw = new BufferedWriter(new FileWriter(outputTxtFile));
-            for (int i=0; i < whatToWrite.length-1; i++)
+            for (int i=0; i < whatToWrite.length; i++)
             {
                 bw.write(whatToWrite[i]);
                 bw.newLine();
