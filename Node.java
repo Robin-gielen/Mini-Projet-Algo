@@ -11,7 +11,6 @@ class Node implements ExprIF{
     Node left;
     Node right;
     Node back;
-    Node next;
     
     /**
      * 
@@ -23,7 +22,6 @@ class Node implements ExprIF{
         left = null;
         right = null;
         back = null;
-        next = null;
     }
     
     /**
